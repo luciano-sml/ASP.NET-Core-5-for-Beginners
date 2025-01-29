@@ -1,0 +1,29 @@
+name: Build and Deploy ASP .NET Core Chapter 12 to GitHub Pages
+
+on:
+push:
+branches: [ master ]
+paths:
+- ‘Chapter 12/Chapter_12_GitHubActions_Examples/**’
+build:
+runs-on: ubuntu-latest
+steps:
+- uses: actions/checkout@v2
+- uses: actions/setup-dotnet@v1
+with:
+dotnet-version: ‘5.0’
+- name: Publish app
+run: dotnet publish -c Release ‘./Chapter 12/
+Chapter_12_GitHubActions_Examples/Chapter12.csproj’
+- name: Save artifacts
+uses: actions/upload-artifact@v2
+with:
+name: myWASM
+path: ‘./Chapter 12/Chapter_12_GitHubActions_Examples/
+bin/Release/net5.0/publish/wwwroot
+build:
+steps:
+# steps to build the application
+deploy:
+steps:
+# steps to deploy the application
